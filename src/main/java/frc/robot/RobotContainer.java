@@ -114,11 +114,10 @@ public class RobotContainer {
 
   public Command getCustomAutoCommand() {
     return Commands.sequence( 
-      //The list of commands goes below here
-      
+      new DriveDistance(1, 12, m_drivetrain),
+      new TurnDegrees(1, 180, m_drivetrain),
+      new DriveDistance(1, 12, m_drivetrain),
+      new TurnDegrees(1, 720, m_drivetrain)
     );
   }
 }
-
-
-
