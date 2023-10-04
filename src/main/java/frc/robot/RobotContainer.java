@@ -74,7 +74,7 @@ public class RobotContainer {
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
-    m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
+    m_chooser.addOption("Custom Auto Command", literallyMe());
     //m_chooser.addOption("3061 Auto Path", Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     SmartDashboard.putData(m_chooser);
   }
@@ -117,7 +117,7 @@ public class RobotContainer {
     return Commands.sequence( 
       //The list of commands goes below here
       new TurnTime(100,20,m_drivetrain),
-      new TurnTime(-100,20,m_drivetrain)
+      new TurnTime(100,20,m_drivetrain)
       
     );
   }
