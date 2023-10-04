@@ -74,7 +74,7 @@ public class RobotContainer {
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
-    m_chooser.addOption("Custom Auto Command", literallyMe());
+    m_chooser.addOption("Literally Me", literallyMe());
     //m_chooser.addOption("3061 Auto Path", Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     SmartDashboard.putData(m_chooser);
   }
