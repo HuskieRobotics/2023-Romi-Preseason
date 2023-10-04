@@ -113,7 +113,7 @@ public class RobotContainer {
     );
   }
 
-  public Command getCustomAutoCommand() {
+  public Command literallyMe() {
     return Commands.sequence( 
       //The list of commands goes below here
       new TurnTime(100,20,m_drivetrain),
