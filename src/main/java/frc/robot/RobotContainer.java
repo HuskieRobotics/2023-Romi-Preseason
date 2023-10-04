@@ -12,6 +12,7 @@ import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.TurnDegrees;
+import frc.robot.commands.TurnTime;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
@@ -115,6 +116,8 @@ public class RobotContainer {
   public Command getCustomAutoCommand() {
     return Commands.sequence( 
       //The list of commands goes below here
+      new TurnTime(100,20,m_drivetrain),
+      new TurnTime(-100,20,m_drivetrain)
       
     );
   }
