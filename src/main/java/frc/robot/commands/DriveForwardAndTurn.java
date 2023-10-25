@@ -5,16 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drivetrain;
 
 public class DriveForwardAndTurn extends CommandBase {
 
   private double distance;
   private double degrees;
+  private Drivetrain drive;
 
   /** Creates a new DriveForwardAndTurn. */
-  public DriveForwardAndTurn(double nDistance, double nDegrees) {
+  public DriveForwardAndTurn(double nDistance, double nDegrees, Drivetrain nDrive) {
     distance = nDistance;
     degrees = nDegrees;
+    drive = nDrive;
   }
 
   // Called when the command is initially scheduled.
