@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.LEDs;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,6 +34,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+
+  private LEDs leds = new LEDs();
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -86,6 +89,10 @@ public class RobotContainer {
      *  Commands.runOnce(Runnable runnable) - Returns a command that runs a runnable (aka a lambda) once
      *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
      */
+
+     onboardButtonA.onTrue(Commands.either(Commands.runOnce(leds::setGreenOff), Commands.runOnce(leds::setGreenOn), leds::getGreenState));
+     onboardButtonB.onTrue(Commands.either(Commands.runOnce(leds::setRedOff), Commands.runOnce(leds::setRedOn), leds::getRedState));
+     onboardButtonC.onTrue(Commands.either(Commands.runOnce(leds::setYellowOff), Commands.runOnce(leds::setYellowOn), leds::getYellowState));
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
