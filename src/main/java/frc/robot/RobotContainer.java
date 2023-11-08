@@ -69,13 +69,14 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
     // Example of how to use the onboard IO
+    /*
     Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
+    */
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
-    //m_chooser.addOption("3061 Auto Path", Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     SmartDashboard.putData(m_chooser);
   }
 
@@ -105,7 +106,6 @@ public class RobotContainer {
    */
   public Command getExampleAutoCommand() {
     return Commands.sequence( 
-      //The list of commands goes here
       new DriveForwardAndTurn(50, 90, m_drivetrain)
     );
   }
