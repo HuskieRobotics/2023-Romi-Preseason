@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 
 public class DriveForwardAndTurn extends CommandBase {
 
@@ -43,6 +44,7 @@ public class DriveForwardAndTurn extends CommandBase {
 
       if(Math.abs(m_drive.getAverageDistanceInch()) >= this.distance)
         finishedMoving = true;
+        m_drive.resetEncoders();
     }
     else
       m_drive.arcadeDrive(0, 1);
@@ -58,9 +60,13 @@ public class DriveForwardAndTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    
     double inchPerDegree = Math.PI * 5.551 / 360;
     // Compare distance travelled from start to distance based on degree turn
+    if(this.finishedMoving)
     return getAverageTurningDistance() >= (inchPerDegree * this.degrees);
+
+    return false;
   }
 
   private double getAverageTurningDistance() {
