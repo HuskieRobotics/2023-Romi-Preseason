@@ -14,6 +14,7 @@ import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveForwardAndTurn;
 import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.OnBoardIO;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -33,6 +34,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  private final LEDs m_leds = new LEDs();
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -68,11 +70,31 @@ public class RobotContainer {
     // is scheduled over it.
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
+
+    Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
+    Trigger onboardButtonB = new Trigger(m_onboardIO::getButtonBPressed);
+    Trigger onboardButtonC = new Trigger(m_onboardIO::getButtonCPressed);
     // Example of how to use the onboard IO
     /*
-    Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     */
+
+    //Implement LEDs
+    onboardButtonA.onTrue(
+      Commands.either(
+        Commands.runOnce(m_leds::turnOffGreen),
+        Commands.runOnce(m_leds::turnOnGreen),
+        m_leds::getGreenStatus));
+    onboardButtonB.onTrue(
+      Commands.either(
+        Commands.runOnce(m_leds::turnOffRed),
+        Commands.runOnce(m_leds::turnOnRed),
+        m_leds::getRedStatus));
+    onboardButtonC.onTrue(
+      Commands.either(
+        Commands.runOnce(()->{m_leds.turnOffYellow();}),
+          Commands.runOnce(()->{m_leds.turnOnYellow();}),
+          ()->{return m_leds.getYellowStatus();}));
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
