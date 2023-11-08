@@ -34,6 +34,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  private final Leds leds = new Leds();
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -78,7 +79,6 @@ public class RobotContainer {
     /*
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     */
-    Leds leds = new Leds();
     
     /*
      * Useful pre-written commands:
@@ -89,7 +89,9 @@ public class RobotContainer {
      *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
      */
 
-     leds.either(Commands.onTrue(Commands.waitSeconds(3), ));
+     onboardButtonA.onTrue(Commands.either(Commands.runOnce(leds::setGreenOn), Commands.runOnce(leds::setGreenOff), leds::getGreen));
+     onboardButtonB.onTrue(Commands.either(Commands.runOnce(leds::setRedOn), Commands.runOnce(leds::setGreenOff), leds::getRed));
+     onboardButtonC.onTrue(Commands.either(Commands.runOnce(leds::setYellowOn), Commands.runOnce(leds::setGreenOff), leds::getYellow));
      
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
