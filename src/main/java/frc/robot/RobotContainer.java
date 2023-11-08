@@ -68,11 +68,24 @@ public class RobotContainer {
     // is scheduled over it.
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
+    // Buttons
+    Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
+    Trigger onboardButtonB = new Trigger(m_onboardIO::getButtonBPressed);
+    Trigger onboardButtonC = new Trigger(m_onboardIO::getButtonCPressed);
+
     // Example of how to use the onboard IO
     /*
-    Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     */
+    
+    /*
+     * Useful pre-written commands:
+     *  Commands.sequence(Command... commands) - Returns a command that runs a list of commands in sequence
+     *  Commands.parallel(Command... commands) - Returns a command that runs a list of commands in parallel
+     *  Commands.waitSeconds(double seconds) - Returns a command that waits for a specified number of seconds to finish
+     *  Commands.runOnce(Runnable runnable) - Returns a command that runs a runnable (aka a lambda) once
+     *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
+     */
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
