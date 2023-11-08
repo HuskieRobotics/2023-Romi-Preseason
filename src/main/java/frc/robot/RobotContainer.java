@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.Leds;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -77,6 +78,7 @@ public class RobotContainer {
     /*
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     */
+    Leds leds = new Leds();
     
     /*
      * Useful pre-written commands:
@@ -87,6 +89,8 @@ public class RobotContainer {
      *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
      */
 
+     leds.either(Commands.onTrue(Commands.waitSeconds(3), ));
+     
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
