@@ -11,6 +11,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.DriveDistance;
+import frc.robot.commands.DriveForwardAndTurn;
 import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
@@ -67,14 +68,28 @@ public class RobotContainer {
     // is scheduled over it.
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
-    // Example of how to use the onboard IO
+    // Buttons
     Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
+    Trigger onboardButtonB = new Trigger(m_onboardIO::getButtonBPressed);
+    Trigger onboardButtonC = new Trigger(m_onboardIO::getButtonCPressed);
+
+    // Example of how to use the onboard IO
+    /*
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
+    */
+    
+    /*
+     * Useful pre-written commands:
+     *  Commands.sequence(Command... commands) - Returns a command that runs a list of commands in sequence
+     *  Commands.parallel(Command... commands) - Returns a command that runs a list of commands in parallel
+     *  Commands.waitSeconds(double seconds) - Returns a command that waits for a specified number of seconds to finish
+     *  Commands.runOnce(Runnable runnable) - Returns a command that runs a runnable (aka a lambda) once
+     *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
+     */
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
-    //m_chooser.addOption("3061 Auto Path", Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     SmartDashboard.putData(m_chooser);
   }
 
@@ -104,11 +119,7 @@ public class RobotContainer {
    */
   public Command getExampleAutoCommand() {
     return Commands.sequence( 
-      //The list of commands goes here
-      new DriveDistance(.5, 6, m_drivetrain),
-      new TurnDegrees(.5, 180, m_drivetrain),
-      new DriveDistance(-0.5, 6, m_drivetrain),
-      new DriveDistance(.5, 12, m_drivetrain)
+      new DriveForwardAndTurn(50, 90, m_drivetrain)
     );
   }
 
@@ -119,6 +130,3 @@ public class RobotContainer {
     );
   }
 }
-
-
-
