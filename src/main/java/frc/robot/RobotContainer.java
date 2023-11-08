@@ -15,6 +15,8 @@ import frc.robot.commands.DriveForwardAndTurn;
 import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
+import frc.robot.subsystems.LEDs.LEDs;
+import frc.robot.subsystems.LEDs.LEDsIODigitalOutput;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,6 +35,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  private final LEDs leds = new LEDs(new LEDsIODigitalOutput());
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -77,6 +80,24 @@ public class RobotContainer {
     /*
     onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
     */
+
+    onboardButtonA.onTrue(
+      Commands.either(
+        Commands.runOnce(leds::greenOff), 
+        Commands.runOnce(leds::greenOn),
+        leds::getGreen));
+
+    onboardButtonB.onTrue(
+      Commands.either(
+        Commands.runOnce(leds::redOff), 
+        Commands.runOnce(leds::redOn),
+        leds::getRed));
+
+    onboardButtonC.onTrue(
+      Commands.either(
+        Commands.runOnce(leds::yellowOff), 
+        Commands.runOnce(leds::yellowOn),
+        leds::getYellow));
     
     /*
      * Useful pre-written commands:
