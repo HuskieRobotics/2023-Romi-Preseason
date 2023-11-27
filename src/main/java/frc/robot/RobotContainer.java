@@ -33,7 +33,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  //private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
   private final LEDs m_leds = new LEDs();
 
   // Assumes a gamepad plugged into channel 0
@@ -71,9 +71,13 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
     // Buttons
-    Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
-    Trigger onboardButtonB = new Trigger(m_onboardIO::getButtonBPressed);
-    Trigger onboardButtonC = new Trigger(m_onboardIO::getButtonCPressed);
+    // Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
+    // Trigger onboardButtonB = new Trigger(m_onboardIO::getButtonBPressed);
+    // Trigger onboardButtonC = new Trigger(m_onboardIO::getButtonCPressed);
+
+    Trigger button1 = new Trigger(()->m_controller.getRawButton(1));
+    Trigger button2 = new Trigger(()->m_controller.getRawButton(2));
+    Trigger button3 = new Trigger(()->m_controller.getRawButton(3));
 
     // Example of how to use the onboard IO
     /*
@@ -90,17 +94,17 @@ public class RobotContainer {
      */
 
     //Implement LEDs
-    onboardButtonA.onTrue(
+    button1.onTrue(
       Commands.either(
         Commands.runOnce(m_leds::turnOffGreen),
         Commands.runOnce(m_leds::turnOnGreen),
         m_leds::getGreenStatus));
-    onboardButtonB.onTrue(
+    button2.onTrue(
       Commands.either(
         Commands.runOnce(m_leds::turnOffRed),
         Commands.runOnce(m_leds::turnOnRed),
         m_leds::getRedStatus));
-    onboardButtonC.onTrue(
+    button3.onTrue(
       Commands.either(
         Commands.runOnce(()->{m_leds.turnOffYellow();}),
           Commands.runOnce(()->{m_leds.turnOnYellow();}),
