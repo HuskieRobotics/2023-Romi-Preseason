@@ -34,7 +34,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
 
   //LED SUBSYSTEM IS IMPLEMENTED HERE
-  private final LEDs m_leds = new LEDs();
+  private final LEDs m_leds = new LEDs(new LEDsIODigitalOutput);
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
