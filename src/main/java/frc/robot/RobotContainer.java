@@ -33,7 +33,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
-  //private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  
   private final LEDs m_leds = new LEDs();
 
   // Assumes a gamepad plugged into channel 0
@@ -70,19 +70,11 @@ public class RobotContainer {
     // is scheduled over it.
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
-    // Buttons
-    // Trigger onboardButtonA = new Trigger(m_onboardIO::getButtonAPressed);
-    // Trigger onboardButtonB = new Trigger(m_onboardIO::getButtonBPressed);
-    // Trigger onboardButtonC = new Trigger(m_onboardIO::getButtonCPressed);
+    // Buttons to control LEDs
 
     Trigger button1 = new Trigger(()->m_controller.getRawButton(1));
     Trigger button2 = new Trigger(()->m_controller.getRawButton(2));
     Trigger button3 = new Trigger(()->m_controller.getRawButton(3));
-
-    // Example of how to use the onboard IO
-    /*
-    onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
-    */
     
     /*
      * Useful pre-written commands:
