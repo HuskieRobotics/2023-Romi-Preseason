@@ -85,9 +85,9 @@ public class RobotContainer {
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
     SmartDashboard.putData(m_chooser);
 
-    zKeyTrigger.onTrue(Commands.either(m_leds::redOn, m_leds::redOn, m_leds.getRedState()));
-    xKeyTrigger.onTrue(Commands.either(m_leds::redOn, m_leds::greenOn, m_leds.getGreenState()));
-    cKeyTrigger.onTrue(Commands.either(m_leds::redOn, m_leds::yellowOn, m_leds.getYellowState()));
+    zKeyTrigger.onTrue(Commands.either(Commands.runOnce(m_leds::redOn), Commands.runOnce(m_leds::redOn), m_leds::getRedState));
+    xKeyTrigger.onTrue(Commands.either(Commands.runOnce(m_leds::redOn), Commands.runOnce(m_leds::greenOn), m_leds::getGreenState));
+    cKeyTrigger.onTrue(Commands.either(Commands.runOnce(m_leds::redOn), Commands.runOnce(m_leds::yellowOn), m_leds::getYellowState));
   }
 
   /**
