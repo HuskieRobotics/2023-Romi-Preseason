@@ -32,7 +32,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final LEDs leds = new LEDs(new LEDsIODigitalOutput());
+
+  //LED SUBSYSTEM IS IMPLEMENTED HERE
+
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -77,23 +79,6 @@ public class RobotContainer {
      *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
      */
 
-     zKeyTrigger.onTrue(
-      Commands.either(
-        Commands.runOnce(leds::greenOff), 
-        Commands.runOnce(leds::greenOn),
-        leds::getGreen));
-
-    xKeyTrigger.onTrue(
-      Commands.either(
-        Commands.runOnce(leds::redOff), 
-        Commands.runOnce(leds::redOn),
-        leds::getRed));
-
-    cKeyTrigger.onTrue(
-      Commands.either(
-        Commands.runOnce(leds::yellowOff), 
-        Commands.runOnce(leds::yellowOn),
-        leds::getYellow));
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());

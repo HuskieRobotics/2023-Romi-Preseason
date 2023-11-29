@@ -2,16 +2,19 @@ package frc.robot.subsystems.LEDs;
 
 public interface LEDsIO {
     public static class LEDsIOInputs {
-        boolean greenOn = false;
-        boolean redOn = false;
-        boolean yellowOn = false;
+        //DATA YOU WANT TO KEEP TRACK OF GOES HERE:
+
     }
+
+    /**
+     * This method is called periodically by the LEDs subsystem. Use it to update the LEDsIOInputs object.
+     * 
+     * @param inputs The LEDsIOInputs object to be updated.
+     */
 
     public default void updateInputs(LEDsIOInputs inputs) {}
 
-    public default void setGreen(boolean on) {}
+    //SUSYSTEM METHODS ARE DEFINED HERE:
 
-    public default void setRed(boolean on) {}
 
-    public default void setYellow(boolean on) {}
 }
