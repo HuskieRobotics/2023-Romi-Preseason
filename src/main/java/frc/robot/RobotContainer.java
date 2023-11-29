@@ -33,8 +33,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
 
-  //LED SUBSYSTEM IS IMPLEMENTED HERE
-
+  //LED SUBSYSTEM IS IMPLEMENTEDs HERE
+  private final LEDs m_LEDs = new LEDs(new LEDsIODigitalOutput());
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
