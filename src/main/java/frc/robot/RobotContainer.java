@@ -59,32 +59,14 @@ public class RobotContainer {
 
     // Buttons
     
-    Trigger button1 = new Trigger(() -> m_controller.getRawButton(1));
-    Trigger button2 = new Trigger(() -> m_controller.getRawButton(2));
-    Trigger button3 = new Trigger(() -> m_controller.getRawButton(3));
+    Trigger zKeyTrigger = new Trigger(() -> m_controller.getRawButton(1));
+    Trigger xKeyTrigger = new Trigger(() -> m_controller.getRawButton(2));
+    Trigger cKeyTrigger = new Trigger(() -> m_controller.getRawButton(3));
 
-    // Example of how to use the onboard IO
+    // Example of how to use the "joystick"
     /*
-    onboardButtonA.onTrue(Commands.sequence(Commands.waitSeconds(3), new DriveDistance(.5, 6, m_drivetrain)));
+    button1.onTrue(Command); - Runs a command when the button is pressed
     */
-
-    button1.onTrue(
-      Commands.either(
-        Commands.runOnce(leds::greenOff), 
-        Commands.runOnce(leds::greenOn),
-        leds::getGreen));
-
-    button2.onTrue(
-      Commands.either(
-        Commands.runOnce(leds::redOff), 
-        Commands.runOnce(leds::redOn),
-        leds::getRed));
-
-    button3.onTrue(
-      Commands.either(
-        Commands.runOnce(leds::yellowOff), 
-        Commands.runOnce(leds::yellowOn),
-        leds::getYellow));
     
     /*
      * Useful pre-written commands:
@@ -94,6 +76,24 @@ public class RobotContainer {
      *  Commands.runOnce(Runnable runnable) - Returns a command that runs a runnable (aka a lambda) once
      *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
      */
+
+     zKeyTrigger.onTrue(
+      Commands.either(
+        Commands.runOnce(leds::greenOff), 
+        Commands.runOnce(leds::greenOn),
+        leds::getGreen));
+
+    xKeyTrigger.onTrue(
+      Commands.either(
+        Commands.runOnce(leds::redOff), 
+        Commands.runOnce(leds::redOn),
+        leds::getRed));
+
+    cKeyTrigger.onTrue(
+      Commands.either(
+        Commands.runOnce(leds::yellowOff), 
+        Commands.runOnce(leds::yellowOn),
+        leds::getYellow));
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
