@@ -3,6 +3,9 @@ package frc.robot.subsystems.LEDs;
 public interface LEDsIO {
     public static class LEDsIOInputs {
         //DATA YOU WANT TO KEEP TRACK OF GOES HERE:
+        public boolean redOn;
+        public boolean yellowOn;
+        public boolean greenOn;
 
     }
 
@@ -16,5 +19,8 @@ public interface LEDsIO {
 
     //SUSYSTEM METHODS ARE DEFINED HERE:
 
+    public void setRed(boolean on);
+    public void setYellow(boolean on);
+    public void setGreen(boolean on);
 
 }

@@ -34,7 +34,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
 
   //LED SUBSYSTEM IS IMPLEMENTED HERE
-
+  private final LEDs m_leds = new LEDs();
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -84,6 +84,10 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
     SmartDashboard.putData(m_chooser);
+
+    zKeyTrigger.onTrue(Commands.either(m_leds::setRed(false), m_leds::setRed(true), m_leds.getRedState()));
+    xKeyTrigger.onTrue(Commands.either(m_leds::setGreen(false), m_leds::setGreen(true), m_leds.getGreenState()));
+    cKeyTrigger.onTrue(Commands.either(m_leds::setYellow(false), m_leds::setYellow(true), m_leds.getYellowState()));
   }
 
   /**

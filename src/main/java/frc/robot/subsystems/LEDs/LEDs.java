@@ -16,10 +16,50 @@ public class LEDs extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    io.updateInputs(inputs);
 
   }
 
   // SHELL METHODS ARE DEFINED HERE:
+
+  public boolean getRedState()
+  {
+    return inputs.redOn;
+  }
+  public boolean getGreenState()
+  {
+    return inputs.greenOn;
+  }
+  public boolean getYellowState()
+  {
+    return inputs.yellowOn;
+  }
+
+  public void redOn()
+  {
+    io.setRed(true);
+  }
+  public void greenOn()
+  {
+    io.setGreen(true);
+  }
+  public void yellowOn()
+  {
+    io.setYellow(true);
+  }
+
+  public void redOff()
+  {
+    io.setRed(false);
+  }
+  public void greenOff()
+  {
+    io.setGreen(false);
+  }
+  public void yellowOff()
+  {
+    io.setYellow(false);
+  }
 
   
 }
