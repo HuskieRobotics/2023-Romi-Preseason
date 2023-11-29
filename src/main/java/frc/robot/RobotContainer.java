@@ -75,6 +75,7 @@ public class RobotContainer {
     Trigger button1 = new Trigger(()->m_controller.getRawButton(1));
     Trigger button2 = new Trigger(()->m_controller.getRawButton(2));
     Trigger button3 = new Trigger(()->m_controller.getRawButton(3));
+    Trigger button4 = new Trigger(()->m_controller.getRawButton(4));
     
     /*
      * Useful pre-written commands:
@@ -101,11 +102,28 @@ public class RobotContainer {
         Commands.runOnce(()->{m_leds.turnOffYellow();}),
           Commands.runOnce(()->{m_leds.turnOnYellow();}),
           ()->{return m_leds.getYellowStatus();}));
+    button4.onTrue(toggleLEDs());
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
     SmartDashboard.putData(m_chooser);
+  }
+
+  private Command toggleLEDs() {
+    return Commands.parallel(
+      Commands.either(
+        Commands.runOnce(m_leds::turnOffGreen),
+        Commands.runOnce(m_leds::turnOnGreen),
+        m_leds::getGreenStatus),
+      Commands.either(
+        Commands.runOnce(m_leds::turnOffRed),
+        Commands.runOnce(m_leds::turnOnRed),
+        m_leds::getRedStatus),
+      Commands.either(
+        Commands.runOnce(m_leds::turnOffYellow),
+        Commands.runOnce(m_leds::turnOnYellow),
+        m_leds::getYellowStatus));
   }
 
   /**
