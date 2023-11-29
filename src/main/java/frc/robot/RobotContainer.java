@@ -29,10 +29,19 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
-public class RobotContainer {
+public class RobotContainer 
+{
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
+<<<<<<< Updated upstream
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+=======
+
+  //LED SUBSYSTEM IS IMPLEMENTED HERE
+
+  private final LEDsIODigitalOutput ledsDigitalOutput = new LEDsIODigitalOutput();
+  private final LEDs leds = new LEDs(ledsDigitalOutput);
+>>>>>>> Stashed changes
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -52,7 +61,8 @@ public class RobotContainer {
   // Your subsystem configuration should take the overlays into account
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+  public RobotContainer() 
+  {
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -87,6 +97,14 @@ public class RobotContainer {
      *  Commands.either(Command onTrue, Command onFalse, BooleanSupplier selector) - Returns one of two commands based on a boolean
      */
 
+<<<<<<< Updated upstream
+=======
+     //Implement LEDs
+     zKeyTrigger.onTrue(Commands.either(Commands.runOnce(leds::turnOffGreen), Commands.runOnce(leds::turnOnGreen), leds::getGreenState));
+     xKeyTrigger.onTrue(Commands.either(Commands.runOnce(leds::turnOffRed), Commands.runOnce(leds::turnOnRed), leds::getRedState));
+     cKeyTrigger.onTrue(Commands.either(Commands.runOnce(leds::turnOffYellow), Commands.runOnce(leds::turnOnYellow), leds::getYellowState));
+
+>>>>>>> Stashed changes
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Example Auto Command", getExampleAutoCommand());
     m_chooser.addOption("Custom Auto Command", getCustomAutoCommand());
